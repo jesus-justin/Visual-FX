@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quantum Portfolio Explorer - A visually stunning interactive experience">
+    
+    <!-- Performance Optimization: Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Custom Fonts for enhanced typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <title>Quantum Portfolio Explorer | Visual FX Showcase</title>
+</head>
+<body>
+    <!-- 
+        ===========================================
+        VISUAL ARCHITECTURE: HERO SECTION
+        ===========================================
+        Purpose: Create immediate visual impact with animated background
+        and clear hierarchy guiding user attention
+    -->
+    <section id="hero" class="hero-section">
+        <!-- Animated particle canvas background -->
+        <canvas id="particleCanvas" class="particle-canvas"></canvas>
+        
+        <!-- Gradient overlay for depth -->
+        <div class="gradient-overlay"></div>
+        
+        <!-- Hero Content with staggered animation -->
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-glow"></span>
+                <span class="badge-text">Next-Gen Experience</span>
+            </div>
+            
+            <h1 class="hero-title">
+                <span class="title-line" data-text="Quantum">Quantum</span>
+                <span class="title-line" data-text="Portfolio">Portfolio</span>
+                <span class="title-line gradient-text" data-text="Explorer">Explorer</span>
+            </h1>
+            
+            <p class="hero-subtitle">
+                Where creativity meets <span class="highlight">innovation</span> through 
+                mesmerizing visual experiences
+            </p>
+            
+            <!-- Call-to-action with magnetic hover effect -->
+            <div class="cta-container">
+                <button class="cta-button magnetic" data-magnetic>
+                    <span class="button-content">
+                        <span class="button-text">Explore Now</span>
+                        <span class="button-icon">→</span>
+                    </span>
+                    <span class="button-glow"></span>
+                </button>
+            </div>
+            
+            <!-- Scroll indicator with animated arrow -->
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span class="scroll-text">Scroll to discover</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+        ===========================================
+        COMPONENT SYSTEMS: NAVIGATION
+        ===========================================
+        Purpose: Reusable glassmorphic navigation that adapts on scroll
+    -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <!-- Logo with SVG animation -->
+            <div class="nav-logo">
+                <svg class="logo-svg" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                    <path class="logo-path" d="M25 5 L45 15 L45 35 L25 45 L5 35 L5 15 Z" 
+                          stroke="currentColor" stroke-width="2" fill="none"/>
+                    <circle class="logo-center" cx="25" cy="25" r="8" fill="currentColor"/>
+                </svg>
+                <span class="logo-text">QP</span>
+            </div>
+            
+            <!-- Navigation links -->
+            <ul class="nav-links">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#showcase" class="nav-link">Showcase</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <!-- Theme toggle button -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span class="theme-icon sun-icon">☀</span>
+                <span class="theme-icon moon-icon">☽</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 
+        ===========================================
+        VISUAL ARCHITECTURE: FEATURES SECTION
+        ===========================================
+        Purpose: Showcase capabilities with card-based layout
+        Using intersection observer for scroll-triggered animations
+    -->
+    <section id="features" class="features-section">
+        <div class="section-container">
+            <!-- Section header with reveal animation -->
+            <div class="section-header">
+                <span class="section-tag">Core Capabilities</span>
+                <h2 class="section-title">
+                    Engineered for <span class="gradient-text">Excellence</span>
+                </h2>
+                <p class="section-description">
+                    Cutting-edge features designed to deliver unparalleled visual experiences
+                </p>
+            </div>
+            
+            <!-- Feature cards grid with staggered entrance -->
+            <div class="features-grid">
+                <!-- Feature Card 1: 3D Transforms -->
+                <article class="feature-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <div class="icon-wrapper">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke-width="2"/>
+                                    <path d="M2 17L12 22L22 17" stroke-width="2"/>
+                                    <path d="M2 12L12 17L22 12" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="card-title">3D Transformations</h3>
+                        <p class="card-description">
+                            Immersive depth and perspective using advanced CSS 3D transforms 
+                            and WebGL acceleration for buttery-smooth animations.
+                        </p>
+                        <div class="card-stats">
+                            <span class="stat">60 FPS</span>
+                            <span class="stat-divider">•</span>
+                            <span class="stat">GPU Accelerated</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Feature Card 2: Motion Design -->
+                <article class="feature-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <div class="icon-wrapper">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="card-title">Fluid Motion</h3>
+                        <p class="card-description">
+                            Physics-based animations with easing curves that feel natural 
+                            and responsive, creating emotional connections through motion.
+                        </p>
+                        <div class="card-stats">
+                            <span class="stat">Spring Physics</span>
+                            <span class="stat-divider">•</span>
+                            <span class="stat">Cubic Bezier</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Feature Card 3: Glassmorphism -->
+                <article class="feature-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <div class="icon-wrapper">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" stroke-width="2"/>
+                                    <path d="M3 9H21" stroke-width="2"/>
+                                    <path d="M9 21V9" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="card-title">Glassmorphism</h3>
+                        <p class="card-description">
+                            Modern frosted-glass aesthetics with backdrop filters, creating 
+                            layers of depth and sophisticated visual hierarchy.
+                        </p>
+                        <div class="card-stats">
+                            <span class="stat">Backdrop Blur</span>
+                            <span class="stat-divider">•</span>
+                            <span class="stat">Multi-layer</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Feature Card 4: Performance -->
+                <article class="feature-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <div class="icon-wrapper">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                                    <path d="M12 6V12L16 14" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="card-title">Optimized Performance</h3>
+                        <p class="card-description">
+                            Lazy loading, code splitting, and efficient rendering ensure 
+                            fast load times without compromising visual quality.
+                        </p>
+                        <div class="card-stats">
+                            <span class="stat">Lazy Load</span>
+                            <span class="stat-divider">•</span>
+                            <span class="stat">Code Split</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+        ===========================================
+        MOTION LOGIC: SHOWCASE SECTION
+        ===========================================
+        Purpose: Interactive 3D carousel with scroll-based parallax
+        Demonstrates advanced motion choreography
+    -->
+    <section id="showcase" class="showcase-section">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Visual Excellence</span>
+                <h2 class="section-title">
+                    Interactive <span class="gradient-text">Showcase</span>
+                </h2>
+            </div>
+            
+            <!-- 3D Carousel Container -->
+            <div class="carousel-container">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Carousel Item 1 -->
+                    <div class="carousel-item">
+                        <div class="item-inner">
+                            <div class="item-image">
+                                <div class="placeholder-gradient gradient-1"></div>
+                                <div class="image-overlay">
+                                    <span class="overlay-text">Immersive Design</span>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <h3>Depth & Dimension</h3>
+                                <p>Multi-layered visual hierarchy</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Carousel Item 2 -->
+                    <div class="carousel-item">
+                        <div class="item-inner">
+                            <div class="item-image">
+                                <div class="placeholder-gradient gradient-2"></div>
+                                <div class="image-overlay">
+                                    <span class="overlay-text">Dynamic Motion</span>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <h3>Fluid Animations</h3>
+                                <p>Physics-based interactions</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Carousel Item 3 -->
+                    <div class="carousel-item">
+                        <div class="item-inner">
+                            <div class="item-image">
+                                <div class="placeholder-gradient gradient-3"></div>
+                                <div class="image-overlay">
+                                    <span class="overlay-text">Color Mastery</span>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <h3>Vibrant Palettes</h3>
+                                <p>Harmonious color theory</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Carousel Item 4 -->
+                    <div class="carousel-item">
+                        <div class="item-inner">
+                            <div class="item-image">
+                                <div class="placeholder-gradient gradient-4"></div>
+                                <div class="image-overlay">
+                                    <span class="overlay-text">Modern UI</span>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <h3>Clean Interfaces</h3>
+                                <p>Minimalist aesthetics</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Carousel Item 5 -->
+                    <div class="carousel-item">
+                        <div class="item-inner">
+                            <div class="item-image">
+                                <div class="placeholder-gradient gradient-5"></div>
+                                <div class="image-overlay">
+                                    <span class="overlay-text">Interactive UX</span>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <h3>User Engagement</h3>
+                                <p>Intuitive experiences</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel Controls -->
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev-btn" id="prevBtn" aria-label="Previous">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M15 18L9 12L15 6" stroke-width="2"/>
+                        </svg>
+                    </button>
+                    <button class="carousel-btn next-btn" id="nextBtn" aria-label="Next">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M9 18L15 12L9 6" stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Progress Indicator -->
+                <div class="carousel-progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+        ===========================================
+        COMPONENT SYSTEMS: CONTACT SECTION
+        ===========================================
+        Purpose: Reusable form components with validation
+        Includes micro-interactions for better UX
+    -->
+    <section id="contact" class="contact-section">
+        <div class="section-container">
+            <div class="contact-grid">
+                <!-- Left: Contact Info -->
+                <div class="contact-info">
+                    <span class="section-tag">Get In Touch</span>
+                    <h2 class="section-title">
+                        Let's Create<br/>
+                        <span class="gradient-text">Together</span>
+                    </h2>
+                    <p class="contact-description">
+                        Ready to bring your vision to life? Reach out and let's craft 
+                        something extraordinary.
+                    </p>
+                    
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M3 8L10.89 13.26C11.57 13.67 12.43 13.67 13.11 13.26L21 8M5 19H19C20.1 19 21 18.1 21 17V7C21 5.9 20.1 5 19 5H5C3.9 5 3 5.9 3 7V17C3 18.1 3.9 19 5 19Z" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <span class="detail-label">Email</span>
+                                <span class="detail-value">hello@quantum.dev</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 5.58 6.58 2 11 2H13C17.42 2 21 5.58 21 10Z" stroke-width="2"/>
+                                    <circle cx="12" cy="10" r="3" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <span class="detail-label">Location</span>
+                                <span class="detail-value">Innovation Hub, Tech City</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right: Contact Form -->
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                class="form-input" 
+                                placeholder="John Doe"
+                                required
+                            >
+                            <span class="input-focus-border"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input" 
+                                placeholder="john@example.com"
+                                required
+                            >
+                            <span class="input-focus-border"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                class="form-input form-textarea" 
+                                placeholder="Tell us about your project..."
+                                rows="4"
+                                required
+                            ></textarea>
+                            <span class="input-focus-border"></span>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn magnetic">
+                            <span class="button-content">
+                                <span class="button-text">Send Message</span>
+                                <span class="button-icon">✓</span>
+                            </span>
+                            <span class="button-glow"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+        ===========================================
+        FOOTER
+        ===========================================
+    -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Quantum Portfolio</h3>
+                    <p>Crafted with passion & precision</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#hero">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#showcase">Showcase</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Quantum Portfolio Explorer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 
+        ===========================================
+        PERFORMANCE OPTIMIZATION
+        ===========================================
+        Scripts loaded at the end for faster initial paint
+        Defer attribute for non-critical scripts
+    -->
+    
+    <!-- Main JavaScript Module -->
+    <script src="js/main.js" defer></script>
+    
+    <!-- Particles System -->
+    <script src="js/particles.js" defer></script>
+    
+    <!-- Animations Controller -->
+    <script src="js/animations.js" defer></script>
+    
+    <!-- Carousel Logic -->
+    <script src="js/carousel.js" defer></script>
+</body>
+</html>

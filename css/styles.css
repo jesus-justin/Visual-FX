@@ -1,0 +1,1291 @@
+/* 
+===================================================
+QUANTUM PORTFOLIO EXPLORER - MAIN STYLESHEET
+===================================================
+Architecture: Mobile-first responsive design
+Performance: Optimized with CSS custom properties
+Visual: Modern glassmorphism with depth layering
+*/
+
+/* 
+===================================================
+1. CSS CUSTOM PROPERTIES (Design Tokens)
+===================================================
+Purpose: Centralized theme management for consistency
+Allows easy theme switching and maintainability
+*/
+:root {
+    /* Color Palette - Primary */
+    --color-primary: #6366f1;
+    --color-primary-light: #818cf8;
+    --color-primary-dark: #4f46e5;
+    
+    /* Color Palette - Gradients */
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --gradient-cool: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+    
+    /* Neutral Colors */
+    --color-bg-primary: #0f0f23;
+    --color-bg-secondary: #1a1a2e;
+    --color-bg-tertiary: #16213e;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #a0a0b8;
+    --color-text-muted: #6b6b8a;
+    
+    /* Glass Effect Colors */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: rgba(0, 0, 0, 0.3);
+    
+    /* Spacing System (8px base) */
+    --space-xs: 0.5rem;    /* 8px */
+    --space-sm: 1rem;      /* 16px */
+    --space-md: 1.5rem;    /* 24px */
+    --space-lg: 2rem;      /* 32px */
+    --space-xl: 3rem;      /* 48px */
+    --space-2xl: 4rem;     /* 64px */
+    --space-3xl: 6rem;     /* 96px */
+    
+    /* Typography Scale */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Playfair Display', serif;
+    
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+    --text-3xl: 2rem;      /* 32px */
+    --text-4xl: 2.5rem;    /* 40px */
+    --text-5xl: 3rem;      /* 48px */
+    --text-6xl: 4rem;      /* 64px */
+    
+    /* Border Radius */
+    --radius-sm: 0.375rem;  /* 6px */
+    --radius-md: 0.5rem;    /* 8px */
+    --radius-lg: 1rem;      /* 16px */
+    --radius-xl: 1.5rem;    /* 24px */
+    --radius-full: 9999px;
+    
+    /* Shadows - Layered depth system */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.4);
+    
+    /* Transitions - Consistent timing functions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    /* Z-index Scale */
+    --z-base: 1;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-overlay: 300;
+    --z-modal: 400;
+    --z-tooltip: 500;
+}
+
+/* 
+===================================================
+2. RESET & BASE STYLES
+===================================================
+Purpose: Normalize browser defaults and set foundation
+*/
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* Smooth scrolling with offset for fixed nav */
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    overflow-x: hidden;
+    
+    /* Performance: Enable GPU acceleration */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 
+===================================================
+3. HERO SECTION - Visual Architecture
+===================================================
+Purpose: Create immersive first impression with layered depth
+*/
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    
+    /* Performance: Create stacking context */
+    isolation: isolate;
+}
+
+/* Particle Canvas Background - Performance optimized */
+.particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    
+    /* Performance: GPU acceleration */
+    will-change: transform;
+}
+
+/* Gradient Overlay - Adds depth and readability */
+.gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 0%,
+        rgba(15, 15, 35, 0.6) 50%,
+        var(--color-bg-primary) 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Hero Content - Layered above background */
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Hero Badge - Subtle announcement element */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-md);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(10px);
+    margin-bottom: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+    
+    /* Motion: Entrance animation */
+    animation: fadeInUp 0.8s var(--transition-spring) backwards;
+}
+
+/* Badge glow effect */
+.badge-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    
+    /* Motion: Continuous shimmer */
+    animation: shimmer 3s infinite;
+}
+
+.badge-text {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Hero Title - Main attention grabber */
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-4xl), 8vw, var(--text-6xl));
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: var(--space-md);
+    
+    /* Performance: Optimize text rendering */
+    text-rendering: optimizeLegibility;
+}
+
+/* Title line animation wrapper */
+.title-line {
+    display: block;
+    position: relative;
+    
+    /* Motion: Staggered entrance with delay */
+    animation: fadeInUp 0.8s var(--transition-spring) backwards;
+}
+
+.title-line:nth-child(1) { animation-delay: 0.1s; }
+.title-line:nth-child(2) { animation-delay: 0.2s; }
+.title-line:nth-child(3) { animation-delay: 0.3s; }
+
+/* Gradient text effect */
+.gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    /* Performance: Optimize for animation */
+    will-change: background-position;
+    background-size: 200% auto;
+    
+    /* Motion: Animated gradient shift */
+    animation: gradientShift 3s ease infinite;
+}
+
+/* Hero Subtitle */
+.hero-subtitle {
+    font-size: clamp(var(--text-lg), 2.5vw, var(--text-xl));
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto var(--space-xl);
+    line-height: 1.7;
+    
+    /* Motion: Entrance animation */
+    animation: fadeInUp 0.8s var(--transition-spring) 0.4s backwards;
+}
+
+.highlight {
+    color: var(--color-primary-light);
+    font-weight: 600;
+}
+
+/* CTA Button Container */
+.cta-container {
+    margin-bottom: var(--space-2xl);
+    
+    /* Motion: Entrance animation */
+    animation: fadeInUp 0.8s var(--transition-spring) 0.5s backwards;
+}
+
+/* CTA Button - Magnetic hover effect */
+.cta-button {
+    position: relative;
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    
+    /* Performance: Create composite layer */
+    will-change: transform;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow), var(--shadow-xl);
+}
+
+.cta-button:active {
+    transform: translateY(0);
+}
+
+/* Button content wrapper */
+.button-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+/* Button glow effect on hover */
+.button-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width var(--transition-slow), height var(--transition-slow);
+}
+
+.cta-button:hover .button-glow {
+    width: 300px;
+    height: 300px;
+}
+
+/* Scroll Indicator - Guides user to scroll */
+.scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-text-muted);
+    
+    /* Motion: Entrance and continuous bounce */
+    animation: fadeInUp 0.8s var(--transition-spring) 0.6s backwards,
+               bounce 2s ease-in-out 1.5s infinite;
+}
+
+/* Animated mouse icon */
+.mouse {
+    width: 24px;
+    height: 36px;
+    border: 2px solid currentColor;
+    border-radius: var(--radius-xl);
+    position: relative;
+}
+
+.wheel {
+    width: 4px;
+    height: 8px;
+    background: currentColor;
+    border-radius: var(--radius-sm);
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Motion: Scroll animation */
+    animation: scrollWheel 1.5s ease-in-out infinite;
+}
+
+.scroll-text {
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* 
+===================================================
+4. NAVIGATION - Component System
+===================================================
+Purpose: Reusable glassmorphic navigation with scroll effects
+*/
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-sticky);
+    padding: var(--space-md) 0;
+    
+    /* Glassmorphism effect */
+    background: transparent;
+    transition: background var(--transition-base), 
+                backdrop-filter var(--transition-base),
+                padding var(--transition-base);
+}
+
+/* Scrolled state - activated via JavaScript */
+.main-nav.scrolled {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-sm) 0;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.logo-svg {
+    width: 32px;
+    height: 32px;
+    color: var(--color-primary-light);
+    
+    /* Motion: Rotate on hover */
+    transition: transform var(--transition-base);
+}
+
+.nav-logo:hover .logo-svg {
+    transform: rotate(90deg);
+}
+
+/* Logo path animation */
+.logo-path {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: drawPath 2s ease forwards;
+}
+
+.logo-center {
+    opacity: 0;
+    animation: fadeIn 0.5s ease 1.5s forwards;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    gap: var(--space-lg);
+    list-style: none;
+}
+
+.nav-link {
+    position: relative;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: var(--text-sm);
+    padding: var(--space-xs) 0;
+    transition: color var(--transition-base);
+}
+
+/* Active link indicator */
+.nav-link.active,
+.nav-link:hover {
+    color: var(--color-text-primary);
+}
+
+/* Underline effect */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: width var(--transition-base);
+}
+
+.nav-link.active::after,
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    overflow: hidden;
+    transition: all var(--transition-base);
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+.theme-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--text-xl);
+    transition: opacity var(--transition-base), 
+                transform var(--transition-base);
+}
+
+.sun-icon {
+    opacity: 1;
+}
+
+.moon-icon {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+/* Dark mode toggle state */
+body.light-mode .sun-icon {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-180deg);
+}
+
+body.light-mode .moon-icon {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0);
+}
+
+/* 
+===================================================
+5. FEATURES SECTION - Visual Architecture
+===================================================
+Purpose: Card-based layout with scroll-triggered animations
+*/
+.features-section {
+    padding: var(--space-3xl) 0;
+    background: linear-gradient(
+        180deg,
+        var(--color-bg-primary) 0%,
+        var(--color-bg-secondary) 100%
+    );
+    position: relative;
+}
+
+.section-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+
+/* Section Header - Reusable component */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+}
+
+.section-tag {
+    display: inline-block;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-primary-light);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-sm);
+    padding: var(--space-xs) var(--space-md);
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: var(--radius-full);
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+}
+
+.section-description {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Features Grid - Responsive layout */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+}
+
+/* Feature Card - Interactive 3D tilt effect */
+.feature-card {
+    position: relative;
+    padding: var(--space-xl);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    
+    /* Performance: Prepare for 3D transforms */
+    transform-style: preserve-3d;
+    transition: transform var(--transition-base), 
+                box-shadow var(--transition-base);
+    
+    /* Motion: Scroll-triggered entrance */
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Card visible state - triggered by Intersection Observer */
+.feature-card.visible {
+    animation: fadeInUp 0.6s var(--transition-spring) forwards;
+}
+
+/* Stagger animation delays */
+.feature-card:nth-child(1).visible { animation-delay: 0.1s; }
+.feature-card:nth-child(2).visible { animation-delay: 0.2s; }
+.feature-card:nth-child(3).visible { animation-delay: 0.3s; }
+.feature-card:nth-child(4).visible { animation-delay: 0.4s; }
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Card glow effect */
+.card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(99, 102, 241, 0.1) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+}
+
+.feature-card:hover .card-glow {
+    opacity: 1;
+}
+
+/* Card Content */
+.card-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Card Icon */
+.card-icon {
+    margin-bottom: var(--space-md);
+}
+
+.icon-wrapper {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-lg);
+    color: white;
+    
+    /* Motion: Scale on parent hover */
+    transition: transform var(--transition-spring);
+}
+
+.feature-card:hover .icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.icon-wrapper svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* Card Title */
+.card-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-primary);
+}
+
+/* Card Description */
+.card-description {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+}
+
+/* Card Stats */
+.card-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.stat {
+    font-weight: 600;
+}
+
+.stat-divider {
+    color: var(--color-text-muted);
+}
+
+/* 
+===================================================
+6. SHOWCASE SECTION - Motion Logic
+===================================================
+Purpose: 3D carousel with physics-based interactions
+*/
+.showcase-section {
+    padding: var(--space-3xl) 0;
+    background: var(--color-bg-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Carousel Container */
+.carousel-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-2xl) 0;
+}
+
+/* Carousel Track - 3D perspective container */
+.carousel-track {
+    display: flex;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+    
+    /* Performance: Enable GPU acceleration */
+    transform: translateX(0);
+    transition: transform var(--transition-slow);
+    will-change: transform;
+}
+
+/* Carousel Item */
+.carousel-item {
+    flex: 0 0 320px;
+    position: relative;
+    
+    /* Performance: Prepare for 3D transforms */
+    perspective: 1000px;
+}
+
+.item-inner {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    
+    /* Motion: 3D transform on hover */
+    transform-style: preserve-3d;
+    transition: transform var(--transition-spring);
+}
+
+.carousel-item:hover .item-inner {
+    transform: rotateY(5deg) scale(1.05);
+}
+
+/* Item Image Container */
+.item-image {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+}
+
+/* Placeholder gradients - can be replaced with images */
+.placeholder-gradient {
+    width: 100%;
+    height: 100%;
+    transition: transform var(--transition-slow);
+}
+
+.gradient-1 { background: var(--gradient-primary); }
+.gradient-2 { background: var(--gradient-secondary); }
+.gradient-3 { background: var(--gradient-tertiary); }
+.gradient-4 { background: var(--gradient-warm); }
+.gradient-5 { background: var(--gradient-cool); }
+
+.carousel-item:hover .placeholder-gradient {
+    transform: scale(1.1);
+}
+
+/* Image Overlay */
+.image-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.carousel-item:hover .image-overlay {
+    opacity: 1;
+}
+
+.overlay-text {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Item Info */
+.item-info {
+    padding: var(--space-lg);
+}
+
+.item-info h3 {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+}
+
+.item-info p {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+}
+
+/* Carousel Controls */
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 var(--space-lg);
+    pointer-events: none;
+    z-index: var(--z-dropdown);
+}
+
+.carousel-btn {
+    width: 48px;
+    height: 48px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all var(--transition-base);
+    color: var(--color-text-primary);
+}
+
+.carousel-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.carousel-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Progress Bar */
+.carousel-progress {
+    margin-top: var(--space-xl);
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    width: 20%;
+    transition: width var(--transition-slow);
+}
+
+/* 
+===================================================
+7. CONTACT SECTION - Component System
+===================================================
+Purpose: Form components with micro-interactions
+*/
+.contact-section {
+    padding: var(--space-3xl) 0;
+    background: linear-gradient(
+        180deg,
+        var(--color-bg-secondary) 0%,
+        var(--color-bg-tertiary) 100%
+    );
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--space-2xl);
+    align-items: center;
+}
+
+/* Contact Info */
+.contact-info {
+    padding: var(--space-xl);
+}
+
+.contact-description {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xl);
+    line-height: 1.7;
+}
+
+.contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.contact-item {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+}
+
+.contact-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+}
+
+.contact-icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--color-primary-light);
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-xs);
+}
+
+.detail-value {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+/* Contact Form */
+.contact-form-wrapper {
+    padding: var(--space-xl);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(10px);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Form Group - Reusable input container */
+.form-group {
+    position: relative;
+}
+
+.form-label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Form Input - With animated focus border */
+.form-input {
+    width: 100%;
+    padding: var(--space-md);
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+}
+
+.form-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--color-primary-light);
+}
+
+.form-input::placeholder {
+    color: var(--color-text-muted);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Animated focus border */
+.input-focus-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: width var(--transition-base);
+}
+
+.form-input:focus ~ .input-focus-border {
+    width: 100%;
+}
+
+/* Submit Button */
+.submit-btn {
+    position: relative;
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    overflow: hidden;
+    transition: all var(--transition-base);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+/* 
+===================================================
+8. FOOTER
+===================================================
+*/
+.main-footer {
+    padding: var(--space-2xl) 0 var(--space-lg);
+    background: var(--color-bg-primary);
+    border-top: 1px solid var(--glass-border);
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+}
+
+.footer-brand h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-xs);
+}
+
+.footer-brand p {
+    color: var(--color-text-secondary);
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.footer-links a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+.footer-links a:hover {
+    color: var(--color-primary-light);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+}
+
+/* 
+===================================================
+9. ANIMATIONS & KEYFRAMES
+===================================================
+Purpose: Reusable animation definitions
+*/
+
+/* Fade in from bottom */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Simple fade in */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Bounce animation */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Gradient shift */
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* SVG path draw */
+@keyframes drawPath {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Mouse scroll wheel */
+@keyframes scrollWheel {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(16px);
+    }
+}
+
+/* 
+===================================================
+10. RESPONSIVE DESIGN
+===================================================
+Purpose: Mobile-first responsive adjustments
+*/
+
+/* Tablet and below */
+@media (max-width: 768px) {
+    /* Navigation: Mobile menu */
+    .nav-links {
+        display: none; /* Can be enhanced with mobile menu */
+    }
+    
+    /* Hero */
+    .hero-title {
+        font-size: var(--text-4xl);
+    }
+    
+    /* Features grid */
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Contact grid */
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Carousel */
+    .carousel-item {
+        flex: 0 0 280px;
+    }
+    
+    /* Spacing adjustments */
+    :root {
+        --space-3xl: 4rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: var(--text-3xl);
+    }
+    
+    .hero-subtitle {
+        font-size: var(--text-base);
+    }
+    
+    .section-container {
+        padding: 0 var(--space-md);
+    }
+}
+
+/* 
+===================================================
+11. UTILITY CLASSES
+===================================================
+Purpose: Reusable helper classes
+*/
+
+/* Magnetic effect - enhanced by JavaScript */
+.magnetic {
+    position: relative;
+    transition: transform var(--transition-base);
+}
+
+/* Tilt effect - enhanced by JavaScript */
+[data-tilt] {
+    transform-style: preserve-3d;
+}
+
+/* Performance: Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
