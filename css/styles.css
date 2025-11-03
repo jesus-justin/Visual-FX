@@ -912,6 +912,390 @@ Purpose: 3D carousel with physics-based interactions
 
 /* 
 ===================================================
+6.5. GITHUB PROJECTS SECTION
+===================================================
+Purpose: Display GitHub repositories dynamically
+*/
+.projects-section {
+    padding: var(--space-3xl) 0;
+    background: linear-gradient(
+        180deg,
+        var(--color-bg-primary) 0%,
+        var(--color-bg-secondary) 100%
+    );
+    position: relative;
+}
+
+/* Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--space-lg);
+    min-height: 400px;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: var(--space-3xl) 0;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(99, 102, 241, 0.1);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+    color: var(--color-text-secondary);
+    font-size: var(--text-lg);
+}
+
+/* Project Card */
+.project-card {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(10px);
+    transition: all var(--transition-base);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    
+    /* Animation entrance */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s var(--transition-spring) forwards;
+}
+
+/* Stagger animation for project cards */
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--color-primary-light);
+}
+
+/* Project Link Wrapper */
+.project-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Project Image Container */
+.project-image-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Placeholder for future images */
+.project-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.8);
+    transition: transform var(--transition-base);
+}
+
+.placeholder-icon {
+    width: 64px;
+    height: 64px;
+    stroke-width: 1.5;
+    opacity: 0.6;
+}
+
+.placeholder-text {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+}
+
+.project-card:hover .project-placeholder {
+    transform: scale(0.95);
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+    display: block;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.05);
+}
+
+/* Project Image Overlay */
+.project-image-overlay,
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 15, 35, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.project-link:hover .project-image-overlay,
+.project-image-container:hover .project-overlay {
+    opacity: 1;
+}
+
+.view-project-text {
+    color: white;
+    font-size: var(--text-lg);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.arrow-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--color-primary-light);
+    animation: arrowBounce 1s ease-in-out infinite;
+}
+
+@keyframes arrowBounce {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(4px, -4px); }
+}
+
+/* Project Content (below image) */
+.project-content {
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Project Card Header */
+.project-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.project-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+    color: white;
+    transition: transform var(--transition-spring);
+}
+
+.project-card:hover .project-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.project-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Project Info */
+.project-info {
+    flex: 1;
+}
+
+.project-name {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    word-break: break-word;
+}
+
+.project-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+.project-name a:hover {
+    color: var(--color-primary-light);
+}
+
+.project-visibility {
+    font-size: var(--text-xs);
+    padding: 2px 8px;
+    background: rgba(99, 102, 241, 0.2);
+    border: 1px solid var(--color-primary-light);
+    border-radius: var(--radius-sm);
+    color: var(--color-primary-light);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Project Description */
+.project-description {
+    color: var(--color-text-secondary);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+    flex: 1;
+}
+
+.project-description.no-description {
+    font-style: italic;
+    opacity: 0.6;
+}
+
+/* Project Meta */
+.project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    align-items: center;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
+    font-size: var(--text-sm);
+}
+
+.project-language {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-text-secondary);
+}
+
+.language-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+/* Language colors */
+.language-dot.javascript { background: #f1e05a; }
+.language-dot.php { background: #4f5d95; }
+.language-dot.python { background: #3572a5; }
+.language-dot.java { background: #b07219; }
+.language-dot.html { background: #e34c26; }
+.language-dot.css { background: #563d7c; }
+.language-dot.typescript { background: #2b7489; }
+.language-dot.default { background: var(--color-text-muted); }
+
+.project-stats {
+    display: flex;
+    gap: var(--space-md);
+    margin-left: auto;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-text-muted);
+}
+
+.stat-item svg {
+    width: 16px;
+    height: 16px;
+}
+
+.project-updated {
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+}
+
+/* Projects Footer */
+.projects-footer {
+    margin-top: var(--space-2xl);
+    text-align: center;
+}
+
+.view-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.view-more-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+    border-color: var(--color-primary-light);
+}
+
+.view-more-btn .button-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Error State */
+.projects-error {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--space-3xl);
+    color: var(--color-text-secondary);
+}
+
+.projects-error h3 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-md);
+    color: var(--color-text-primary);
+}
+
+/* 
+===================================================
 7. CONTACT SECTION - Component System
 ===================================================
 Purpose: Form components with micro-interactions
@@ -1227,6 +1611,11 @@ Purpose: Mobile-first responsive adjustments
     
     /* Features grid */
     .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Projects grid */
+    .projects-grid {
         grid-template-columns: 1fr;
     }
     
