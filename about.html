@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Jesus Justin B. Mercado - BSIT Student Portfolio">
+    
+    <!-- Performance Optimization: Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Custom Fonts for enhanced typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/about.css">
+    
+    <title>About Me | Jesus Justin B. Mercado</title>
+</head>
+<body>
+    <!-- 
+        ===========================================
+        NAVIGATION
+        ===========================================
+    -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <!-- Logo with SVG animation -->
+            <div class="nav-logo">
+                <a href="index.html" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit;">
+                    <svg class="logo-svg" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <path class="logo-path" d="M25 5 L45 15 L45 35 L25 45 L5 35 L5 15 Z" 
+                              stroke="currentColor" stroke-width="2" fill="none"/>
+                        <circle class="logo-center" cx="25" cy="25" r="8" fill="currentColor"/>
+                    </svg>
+                    <span class="logo-text">QP</span>
+                </a>
+            </div>
+            
+            <!-- Navigation links -->
+            <ul class="nav-links">
+                <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                <li><a href="index.html#features" class="nav-link">Features</a></li>
+                <li><a href="index.html#showcase" class="nav-link">Showcase</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="about.html" class="nav-link active">About Me</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <!-- Theme toggle button -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span class="theme-icon sun-icon">☀</span>
+                <span class="theme-icon moon-icon">☽</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 
+        ===========================================
+        ABOUT ME SECTION
+        ===========================================
+    -->
+    <section class="about-hero-section">
+        <!-- Animated particle canvas background -->
+        <canvas id="particleCanvas" class="particle-canvas"></canvas>
+        
+        <!-- Gradient overlay for depth -->
+        <div class="gradient-overlay"></div>
+        
+        <div class="about-container">
+            <!-- Profile Picture with animated border -->
+            <div class="profile-picture-wrapper">
+                <div class="profile-glow"></div>
+                <div class="profile-picture">
+                    <!-- Placeholder for profile image -->
+                    <div class="profile-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <!-- When you add your image, replace the placeholder div above with: -->
+                    <!-- <img src="images/profile.jpg" alt="Jesus Justin B. Mercado" class="profile-img"> -->
+                </div>
+            </div>
+            
+            <!-- About Content -->
+            <div class="about-content">
+                <div class="about-badge">
+                    <span class="badge-glow"></span>
+                    <span class="badge-text">Get to Know Me</span>
+                </div>
+                
+                <h1 class="about-title">
+                    <span class="title-line">Welcome to my</span>
+                    <span class="title-line gradient-text">Portfolio</span>
+                </h1>
+                
+                <div class="about-description">
+                    <p class="greeting">
+                        <span class="wave-emoji">👋</span> Hi! I am <strong class="highlight">Jesus Justin B. Mercado</strong>
+                    </p>
+                    
+                    <p class="intro">
+                        This is my Portfolio displaying my accomplished and in progress projects.
+                    </p>
+                    
+                    <p class="education">
+                        I am currently a <strong class="highlight">3rd Year BSIT</strong> Major in 
+                        <strong class="highlight">Business Analytics</strong> at 
+                        <strong class="highlight">Batangas State University - TNEU Lipa Campus</strong>
+                    </p>
+                    
+                    <p class="closing">
+                        Nice to meet you! 🚀
+                    </p>
+                </div>
+                
+                <!-- Call to Action Buttons -->
+                <div class="about-cta">
+                    <a href="index.html#projects" class="cta-button magnetic primary">
+                        <span class="button-content">
+                            <span class="button-text">View My Projects</span>
+                            <span class="button-icon">→</span>
+                        </span>
+                        <span class="button-glow"></span>
+                    </a>
+                    
+                    <a href="index.html#contact" class="cta-button magnetic secondary">
+                        <span class="button-content">
+                            <span class="button-text">Get in Touch</span>
+                            <span class="button-icon">✉</span>
+                        </span>
+                        <span class="button-glow"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+        ===========================================
+        SKILLS & INTERESTS SECTION (Optional)
+        ===========================================
+    -->
+    <section class="skills-section">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">What I Do</span>
+                <h2 class="section-title">
+                    Skills & <span class="gradient-text">Interests</span>
+                </h2>
+            </div>
+            
+            <div class="skills-grid">
+                <!-- Skill Card 1 -->
+                <div class="skill-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Creating responsive and interactive web applications using modern technologies.</p>
+                </div>
+                
+                <!-- Skill Card 2 -->
+                <div class="skill-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3>Business Analytics</h3>
+                    <p>Analyzing data to derive meaningful insights for business decision-making.</p>
+                </div>
+                
+                <!-- Skill Card 3 -->
+                <div class="skill-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>Designing beautiful and user-friendly interfaces with attention to detail.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+        ===========================================
+        FOOTER
+        ===========================================
+    -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Quantum Portfolio</h3>
+                    <p>Crafted with passion & precision</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html#hero">Home</a>
+                    <a href="index.html#features">Features</a>
+                    <a href="index.html#showcase">Showcase</a>
+                    <a href="index.html#projects">Projects</a>
+                    <a href="about.html">About Me</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Jesus Justin B. Mercado. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 
+        ===========================================
+        SCRIPTS
+        ===========================================
+    -->
+    <script src="js/particles.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/animations.js" defer></script>
+</body>
+</html>

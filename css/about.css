@@ -1,0 +1,373 @@
+/* 
+===================================================
+ABOUT ME PAGE - CUSTOM STYLES
+===================================================
+Purpose: Specific styles for the About Me page
+*/
+
+/* 
+===================================================
+1. ABOUT HERO SECTION
+===================================================
+*/
+.about-hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: var(--space-3xl) 0;
+}
+
+.about-container {
+    position: relative;
+    z-index: 3;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2xl);
+}
+
+/* 
+===================================================
+2. PROFILE PICTURE
+===================================================
+*/
+.profile-picture-wrapper {
+    position: relative;
+    animation: fadeInUp 0.8s var(--transition-spring) 0.2s backwards;
+}
+
+/* Glowing effect behind profile */
+.profile-glow {
+    position: absolute;
+    inset: -20px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.4;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
+}
+
+/* Profile picture container */
+.profile-picture {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 4px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-xl);
+    transition: transform var(--transition-base);
+}
+
+.profile-picture:hover {
+    transform: scale(1.05) rotate(5deg);
+}
+
+/* Profile placeholder (will be replaced with actual image) */
+.profile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+}
+
+.profile-placeholder svg {
+    width: 100px;
+    height: 100px;
+    color: white;
+    opacity: 0.8;
+}
+
+/* Actual profile image styling */
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 
+===================================================
+3. ABOUT CONTENT
+===================================================
+*/
+.about-content {
+    text-align: center;
+    max-width: 800px;
+}
+
+.about-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-md);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(10px);
+    margin-bottom: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s var(--transition-spring) 0.3s backwards;
+}
+
+.about-title {
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-4xl), 6vw, var(--text-5xl));
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: var(--space-xl);
+}
+
+.about-title .title-line {
+    display: block;
+    animation: fadeInUp 0.8s var(--transition-spring) backwards;
+}
+
+.about-title .title-line:nth-child(1) {
+    animation-delay: 0.4s;
+}
+
+.about-title .title-line:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+/* 
+===================================================
+4. ABOUT DESCRIPTION
+===================================================
+*/
+.about-description {
+    font-size: var(--text-lg);
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2xl);
+    animation: fadeInUp 0.8s var(--transition-spring) 0.6s backwards;
+}
+
+.about-description p {
+    margin-bottom: var(--space-md);
+}
+
+.greeting {
+    font-size: var(--text-2xl);
+    color: var(--color-text-primary);
+}
+
+.wave-emoji {
+    display: inline-block;
+    animation: wave 2s ease-in-out infinite;
+    transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    10%, 30% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    40%, 60% { transform: rotate(10deg); }
+    50% { transform: rotate(-4deg); }
+    70%, 90% { transform: rotate(0deg); }
+}
+
+.highlight {
+    color: var(--color-primary-light);
+    font-weight: 700;
+}
+
+.intro {
+    font-size: var(--text-xl);
+}
+
+.education {
+    font-size: var(--text-lg);
+    padding: var(--space-lg);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(10px);
+}
+
+.closing {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+/* 
+===================================================
+5. CALL TO ACTION BUTTONS
+===================================================
+*/
+.about-cta {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeInUp 0.8s var(--transition-spring) 0.7s backwards;
+}
+
+.cta-button.primary {
+    background: var(--gradient-primary);
+}
+
+.cta-button.secondary {
+    background: var(--glass-bg);
+    border: 2px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+}
+
+.cta-button.secondary:hover {
+    border-color: var(--color-primary-light);
+}
+
+/* 
+===================================================
+6. SKILLS SECTION
+===================================================
+*/
+.skills-section {
+    padding: var(--space-3xl) 0;
+    background: linear-gradient(
+        180deg,
+        var(--color-bg-primary) 0%,
+        var(--color-bg-secondary) 100%
+    );
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+}
+
+.skill-card {
+    position: relative;
+    padding: var(--space-xl);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    transition: all var(--transition-base);
+    transform-style: preserve-3d;
+}
+
+.skill-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.skill-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-lg);
+    transition: transform var(--transition-spring);
+}
+
+.skill-card:hover .skill-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.skill-icon svg {
+    width: 40px;
+    height: 40px;
+    color: white;
+}
+
+.skill-card h3 {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-primary);
+}
+
+.skill-card p {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+/* 
+===================================================
+7. RESPONSIVE DESIGN
+===================================================
+*/
+@media (max-width: 768px) {
+    .about-container {
+        padding: 0 var(--space-md);
+    }
+    
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .profile-placeholder svg {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .about-title {
+        font-size: var(--text-3xl);
+    }
+    
+    .greeting {
+        font-size: var(--text-xl);
+    }
+    
+    .about-description {
+        font-size: var(--text-base);
+    }
+    
+    .about-cta {
+        flex-direction: column;
+    }
+    
+    .cta-button {
+        width: 100%;
+    }
+    
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-title {
+        font-size: var(--text-2xl);
+    }
+    
+    .profile-picture {
+        width: 120px;
+        height: 120px;
+    }
+}
